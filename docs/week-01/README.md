@@ -3,6 +3,7 @@
 一个用于学习 AI 应用工程基础的最小项目（Week 1）。
 
 ## 本周目标
+
 - 跑通 Kimi（Moonshot AI）Chat Completions 的真实调用
 - 对同一段文本执行 3 类任务：
   - 总结
@@ -11,26 +12,27 @@
 - 观察不同 prompt 的输出差异
 
 ## 技术栈
+
 - Next.js（App Router）
 - TypeScript
 - OpenAI Node SDK（用于调用 Kimi 的 OpenAI 兼容接口）
 - Kimi Chat Completions（由 `src/app/api/generate/route.ts` 发起）
 
 ## 如何运行
+
 1. 配置环境变量（必须先有 Key）
-   - 编辑 `./.env.local`：
-     - `MOONSHOT_API_KEY=你的_moonshot_api_key`
-     - `MOONSHOT_MODEL=kimi-k2.5`
-     - `MOONSHOT_BASE_URL=https://api.moonshot.cn/v1`
-
+  - 编辑 `./.env.local`：
+    - `MOONSHOT_API_KEY=你的_moonshot_api_key`
+    - `MOONSHOT_MODEL=kimi-k2.5`
+    - `MOONSHOT_BASE_URL=https://api.moonshot.cn/v1`
 2. 启动项目
-   - `npm install`
-   - `npm run dev`
-
+  - `npm install`
+  - `npm run dev`
 3. 打开页面
-   - `http://localhost:3000`
+  - `http://localhost:3000`
 
 ## 当前功能
+
 - 文本输入
 - 任务切换（总结 / 行动项提取 / 风险识别）
 - 调用模型生成结果
@@ -38,34 +40,44 @@
 - 清空输入
 
 ## 你这周最该关注的 3 个观察点
+
 - 同样输入，不同任务，结果为什么不同
 - 模型什么时候开始泛化或臆测（尤其是输入模糊时）
 - 哪种 prompt 更稳（目标更具体、输出要求更明确、禁止项更清楚）
 
 ## 测试输入样例（文档提供）
+
 ### 样例 1：会议纪要
+
 本周产品评审会议决定，下周三前由小王整理新版首页原型，小李负责补充竞品对比表。当前风险是需求方还没有确认会员体系的优先级，如果继续延后，开发排期可能受影响。
 
 ### 样例 2：需求描述
+
 我们需要做一个面向团队内部的知识助手，支持上传文档、按文档问答、输出总结。当前还未确定是否需要权限系统，也没有明确多工作区隔离方案。
 
 ### 样例 3：模糊文本
+
 大家后面看情况推进一下，很多事都挺着急的，能不能快一点再说。
 
 ## 本周复盘
+
 ### 做对了什么
+
 - 把“UI -> `/api/generate` -> LLM -> 展示结果”最小闭环跑通
 - prompt 被抽离为项目资产（便于后续做版本对比/失败复盘）
 
 ### 遇到的问题 / 失败案例
+
 - 失败案例：如果 `MOONSHOT_API_KEY` 为空/无效，后端会返回 `401 Invalid Authentication`，页面显示“生成失败，请稍后重试。”
 - 失败案例：当 `MOONSHOT_BASE_URL` 配成 `https://api.moonshot.ai/v1` 时，在当前网络下请求会在 TLS 阶段失败；改成 `https://api.moonshot.cn/v1` 后网络连通正常。
 
 ### 下周准备改什么
+
 - 加入更明确的错误提示（区分 401/网络失败/超长输入）
 - 做 prompt 的输出格式约束一致性测试（为失败复盘准备更稳定的结构）
 
 ## 1-2 分钟 Demo 脚本（建议口播顺序）
+
 1. 这是一个用来学习 AI 应用工程基础的 Prompt Lab。
 2. 我先输入一段会议纪要，选择“总结”，展示结果。
 3. 切换成“行动项提取”，展示同一输入下结果不同。

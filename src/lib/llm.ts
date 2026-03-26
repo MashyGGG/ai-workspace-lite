@@ -29,7 +29,9 @@ export async function generateText({
   }
 
   const messages = [
-    ...(systemMessage ? [{ role: "system" as const, content: systemMessage }] : []),
+    ...(systemMessage
+      ? [{ role: "system" as const, content: systemMessage }]
+      : []),
     { role: "user" as const, content: prompt },
   ];
 
@@ -67,7 +69,7 @@ JSON 必须严格符合以下结构（字段名一致）：
  */
 export async function extractStructuredJson(
   userText: string,
-  options?: { model?: string; maxTokens?: number }
+  options?: { model?: string; maxTokens?: number },
 ): Promise<string> {
   if (!apiKey) {
     throw new Error("Missing MOONSHOT_API_KEY in environment.");
@@ -91,4 +93,3 @@ export async function extractStructuredJson(
 
   return completion.choices?.[0]?.message?.content ?? "";
 }
-
