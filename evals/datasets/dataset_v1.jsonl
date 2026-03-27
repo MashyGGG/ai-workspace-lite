@@ -1,0 +1,20 @@
+{"id":"extract_001","type":"extract","input":"本周项目例会决定，下周一前由小王完成首页原型，小李负责整理竞品资料。当前风险是需求方还没有确认会员规则。","must_include":["首页原型","竞品资料","会员规则"],"must_not_include":["数据库迁移"],"notes":"应抽到行动项和风险"}
+{"id":"extract_002","type":"extract","input":"产品计划在周五发布 MVP。张三负责联调支付接口，李四准备发布公告。待确认：是否需要支持国际信用卡。","must_include":["MVP","支付","国际信用卡"],"must_not_include":["Kubernetes集群"],"notes":"行动项与待确认问题"}
+{"id":"extract_003","type":"extract","input":"代码评审结论：接口超时问题由后端组本周内修复；前端无需改动。当前无新增风险。","must_include":["超时","后端"],"must_not_include":["数据库迁移"],"notes":"以原文为准不编造风险"}
+{"id":"extract_004","type":"extract","input":"客户需求变更：希望在设置页增加深色模式开关，设计稿下周三交付。","must_include":["深色模式","设置页"],"must_not_include":["多工作区权限"],"notes":"单一需求抽取"}
+{"id":"extract_005","type":"extract","input":"运营周报：本周 DAU 与上周持平；下周重点做拉新活动。未列出具体负责人与风险。","must_include":["DAU","拉新"],"must_not_include":["虚构负责人姓名"],"notes":"信息较少时仍应有摘要"}
+{"id":"extract_006","type":"extract","input":"安全复盘：日志中曾打印敏感 token，已轮转密钥。行动项：一周内完成日志脱敏改造。风险：拖延可能影响合规审计。","must_include":["脱敏","token","合规"],"must_not_include":["量子加密"],"notes":"安全类行动项与风险"}
+{"id":"extract_007","type":"extract","input":"技术栈决议：前端使用 Next.js，模型调用走 Kimi（Moonshot）兼容接口；未经评审不得对接生产支付网关。","must_include":["Next.js","Kimi"],"must_not_include":["量子计算芯片"],"notes":"纪要中的关键名词"}
+{"id":"extract_008","type":"extract","input":"Sprint 目标：完成 Doc QA 的引用展示优化；负责人 Carol；截止本迭代结束。","must_include":["Doc QA","引用"],"must_not_include":["区块链"],"notes":"迭代行动项"}
+{"id":"docs_001","type":"docs","input":"当前版本支持哪些能力？","must_include":["Prompt Lab","Structured Extractor","Doc QA"],"must_not_include":["多工作区权限隔离"],"require_citation":true,"notes":"答案应来自 sample-docs"}
+{"id":"docs_002","type":"docs","input":"Week 4 的目标是什么？","must_include":["整合","Alpha","工具"],"must_not_include":["Week 9"],"require_citation":true,"notes":"路线图与 FAQ"}
+{"id":"docs_003","type":"docs","input":"当前是否支持多工作区权限？","must_include":["不支持"],"must_not_include":["已全面支持"],"require_citation":false,"notes":"否定类问题要保守"}
+{"id":"docs_004","type":"docs","input":"公司内部量子计算芯片选型指南在第几章？","must_include":["未在文档中找到足够依据"],"must_not_include":["第3章","第三章"],"require_citation":false,"notes":"文档无依据时不要编造"}
+{"id":"docs_005","type":"docs","input":"路线图里 Week 2 做什么？","must_include":["Structured Extractor"],"must_not_include":["Week 2 做区块链"],"require_citation":true,"notes":"roadmap.md"}
+{"id":"docs_006","type":"docs","input":"当前明确写明了哪些「暂不支持」的能力？","must_include":["多工作区","自动执行"],"must_not_include":["已全部上线"],"require_citation":true,"notes":"product.md 列表"}
+{"id":"docs_007","type":"docs","input":"Doc QA 在路线图里是第几周推出的？","must_include":["Week 3","3"],"must_not_include":["Week 5"],"require_citation":true,"notes":"序号类问题"}
+{"id":"docs_008","type":"docs","input":"FAQ 里对「当前支持哪些能力」怎么回答？","must_include":["Prompt Lab","Doc QA"],"must_not_include":["支持多工作区"],"require_citation":true,"notes":"faq.txt 复述"}
+{"id":"task_001","type":"task","input":"根据这段结论，帮我创建一个跟进任务：确认 Week 4 整合页和最小工具调用闭环","expect_task":true,"notes":"应触发 create_task"}
+{"id":"task_002","type":"task","input":"请创建待办：本周内跑通 eval 脚本并生成 Markdown 报告。","expect_task":true,"notes":"明确待办措辞"}
+{"id":"task_003","type":"task","input":"我需要跟进事项：和产品确认 Doc QA 引用格式是否在下周发布。请帮我保存成任务。","expect_task":true,"notes":"口语化跟进"}
+{"id":"task_004","type":"task","input":"请用一句话解释什么是 JSON，不要创建任何任务。","expect_task":false,"notes":"不应触发工具"}

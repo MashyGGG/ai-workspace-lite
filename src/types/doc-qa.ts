@@ -1,3 +1,5 @@
+import type { RouteMetrics } from "@/types/api-metrics";
+
 export type Citation = {
   filename: string;
   quote?: string;
@@ -14,4 +16,5 @@ export type DocQAResponse = {
   citations: Citation[];
   searchResults: SearchResultItem[];
   model?: string;
+  metrics?: RouteMetrics;
 };

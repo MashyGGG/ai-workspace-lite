@@ -1,109 +1,68 @@
- "use client";
+import Link from "next/link";
 
-import { useState } from "react";
-import { ResultCard } from "@/components/ResultCard";
-import type { PromptTask } from "@/types/prompt-task";
+const cards = [
+  {
+    href: "/prompt",
+    title: "Prompt Lab",
+    description: "选择任务类型，对比不同 prompt 下的模型输出。",
+  },
+  {
+    href: "/extract",
+    title: "Structured Extractor",
+    description: "从长文本抽取摘要、行动项、风险与待确认问题。",
+  },
+  {
+    href: "/docs",
+    title: "Doc QA with Citations",
+    description: "基于已索引文档进行带引用与检索预览的问答。",
+  },
+  {
+    href: "/workspace",
+    title: "Approval-based Tasks",
+    description: "Agent 提议创建任务，经你确认后才写入列表。",
+  },
+  {
+    href: "/ops",
+    title: "Ops & Cost",
+    description: "查看近期请求的 token、延迟与估算成本。",
+  },
+] as const;
 
 export default function HomePage() {
-  const [text, setText] = useState("");
-  const [task, setTask] = useState<PromptTask>("summarize");
-  const [result, setResult] = useState("");
-  const [model, setModel] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  async function handleSubmit() {
-    setLoading(true);
-    setError("");
-    setResult("");
-
-    try {
-      const res = await fetch("/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text, task }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "请求失败");
-      }
-
-      setResult(data.result || "");
-      setModel(data.model || "");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "发生未知错误");
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
-    <main className="mx-auto max-w-4xl p-6 space-y-6">
+    <main className="mx-auto max-w-5xl p-6 space-y-8">
       <header className="space-y-2">
-        <h1 className="text-3xl font-bold">Prompt Lab v1</h1>
-        <p className="text-sm text-gray-600">
-          输入一段文本，选择任务，观察不同 prompt 的输出差异。
+        <h1 className="text-3xl font-bold">AI Workspace Lite Beta</h1>
+        <p className="text-sm text-gray-600 max-w-2xl">
+          作品集版工作台：结构化抽取、带引用文档问答、审批式任务、本地评测与安全回归，以及 Ops
+          观测。导航栏可进入各页面；完成分析后可在{" "}
+          <Link href="/workspace" className="underline hover:text-black">
+            Workspace
+          </Link>{" "}
+          创建跟进任务，在{" "}
+          <Link href="/ops" className="underline hover:text-black">
+            Ops
+          </Link>{" "}
+          查看调用摘要。
         </p>
       </header>
 
-      <section className="space-y-4">
-        <div className="space-y-2">
-          <label className="text-sm font-medium">任务类型</label>
-          <select
-            value={task}
-            onChange={(e) => setTask(e.target.value as PromptTask)}
-            className="w-full rounded-lg border px-3 py-2"
-          >
-            <option value="summarize">总结</option>
-            <option value="action_items">行动项提取</option>
-            <option value="risk_review">风险识别</option>
-          </select>
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm font-medium">输入文本</label>
-          <textarea
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            rows={12}
-            placeholder="请输入会议纪要、需求描述或任意文本..."
-            className="w-full rounded-lg border px-3 py-2"
-          />
-        </div>
-
-        <div className="flex gap-3">
-          <button
-            onClick={handleSubmit}
-            disabled={loading || !text.trim()}
-            className="rounded-lg bg-black px-4 py-2 text-white disabled:opacity-50"
-          >
-            {loading ? "生成中..." : "开始生成"}
-          </button>
-
-          <button
-            onClick={() => {
-              setText("");
-              setResult("");
-              setError("");
-            }}
-            className="rounded-lg border px-4 py-2"
-          >
-            清空
-          </button>
-        </div>
-      </section>
-
-      {error ? (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-600">
-          {error}
-        </div>
-      ) : null}
-
-      {result ? <ResultCard result={result} model={model} /> : null}
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {cards.map((c) => (
+          <li key={c.href}>
+            <Link
+              href={c.href}
+              className="block h-full rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-gray-400 hover:shadow"
+            >
+              <h2 className="text-lg font-semibold">{c.title}</h2>
+              <p className="mt-2 text-sm text-gray-600">{c.description}</p>
+              <span className="mt-4 inline-block text-sm text-gray-900 underline">
+                进入
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </main>
   );
 }

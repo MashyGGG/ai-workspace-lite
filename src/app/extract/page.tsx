@@ -5,6 +5,10 @@ import type { ExtractionResult } from "@/schemas/extraction";
 import { ExtractionResultCard } from "@/components/ExtractionResultCard";
 import { JsonPreview } from "@/components/JsonPreview";
 import { extractionToMarkdown } from "@/lib/extraction-markdown";
+import { addTask } from "@/lib/task-store";
+import { addOpLog, createOpLogFromResponse } from "@/lib/ops-store";
+import type { RouteMetrics } from "@/types/api-metrics";
+import { createTask } from "@/tools/create-task";
 
 type ApiErrorBody = {
   error?: string;
@@ -19,6 +23,26 @@ export default function ExtractPage() {
   const [error, setError] = useState("");
   const [copySummaryDone, setCopySummaryDone] = useState(false);
   const [exportDone, setExportDone] = useState(false);
+  const [taskSaved, setTaskSaved] = useState(false);
+
+  const MAX_TASK_TITLE = 200;
+
+  function titleForTask(r: ExtractionResult): string {
+    const fromAction = r.actionItems?.[0]?.task?.trim();
+    if (fromAction) return fromAction.slice(0, MAX_TASK_TITLE);
+    const s = r.summary.trim();
+    if (s) return s.slice(0, MAX_TASK_TITLE);
+    return "结构化抽取跟进";
+  }
+
+  function handleSaveAsTask() {
+    if (!result) return;
+    addTask(
+      createTask({ title: titleForTask(result), source: "extract" }),
+    );
+    setTaskSaved(true);
+    setTimeout(() => setTaskSaved(false), 2500);
+  }
 
   async function handleExtract() {
     setLoading(true);
@@ -35,6 +59,7 @@ export default function ExtractPage() {
       const data = (await res.json()) as ApiErrorBody & {
         result?: ExtractionResult;
         model?: string;
+        metrics?: RouteMetrics;
       };
 
       if (!res.ok) {
@@ -49,6 +74,12 @@ export default function ExtractPage() {
 
       setResult(data.result);
       setModel(data.model || "");
+
+      if (data.metrics && data.model) {
+        addOpLog(
+          createOpLogFromResponse("extract", data.model, data.metrics),
+        );
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "发生未知错误");
     } finally {
@@ -136,6 +167,13 @@ export default function ExtractPage() {
                 className="rounded-lg border px-4 py-2"
               >
                 {exportDone ? "已导出" : "导出 Markdown"}
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveAsTask}
+                className="rounded-lg border border-gray-800 px-4 py-2"
+              >
+                {taskSaved ? "已加入任务列表" : "保存为任务"}
               </button>
             </>
           ) : null}

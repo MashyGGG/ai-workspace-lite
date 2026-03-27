@@ -4,6 +4,8 @@
 
 # Doc QA v1
 
+> **本仓库实现（国内 Kimi）**：未使用 OpenAI `file_search` / vector store，而是**本地索引 + 将文档拼入 `ask-docs` 的 system 上下文**；示例代码中的 `OPENAI_API_KEY` 与本仓库无关。说明见 [domestic-llm.md](../domestic-llm.md)。
+
 把 3–5 份本地文档接进 OpenAI 的 `file_search`，然后在网页里提问，返回**答案 + 引用来源 + 检索结果预览**。`file_search` 是 Responses API 的内建工具；使用时需要先准备一个 vector store，并在 `responses.create` 里传 `tools: [{ type: "file_search", vector_store_ids: [...] }]`。如果你加上 `include: ["file_search_call.results"]`，还能把检索结果带回来做排查；回答里的 annotations 也会带文件引用信息。vector store 在未显式设置时会使用 `auto` chunking strategy。([OpenAI 平台](https://platform.openai.com/docs/guides/tools-file-search?lang=javascript))
 
 ---

@@ -15,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "AI Workspace Lite",
-  description: "Prompt Lab & Structured Extractor — AI 应用工程练习",
+  description:
+    "AI Workspace Lite Alpha — Prompt Lab、结构化抽取、文档问答与任务工作台",
 };
 
 export default function RootLayout({

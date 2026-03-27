@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DEFAULT_MODEL, extractStructuredJson } from "@/lib/llm";
+import { extractStructuredJson } from "@/lib/llm";
 import { ExtractionSchema } from "@/schemas/extraction";
+import { checkUserInputSafety } from "@/lib/safety";
+import { normalizeChatUsage } from "@/lib/chat-usage";
+import { metricsFromNormalizedUsage } from "@/lib/route-metrics";
 
 type RequestBody = {
   text?: string;
@@ -40,7 +43,19 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const raw = await extractStructuredJson(text);
+    const safety = await checkUserInputSafety(text);
+    if (!safety.ok) {
+      return NextResponse.json(
+        { error: safety.message, blocked: true },
+        { status: 400 },
+      );
+    }
+
+    const llmStarted = Date.now();
+    const { content: raw, usage, model: modelUsed } =
+      await extractStructuredJson(text);
+    const latencyMs = Date.now() - llmStarted;
+
     if (!raw.trim()) {
       return NextResponse.json(
         { error: "模型未返回内容，请稍后重试。" },
@@ -68,9 +83,20 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const normalized = normalizeChatUsage(usage);
+    const metrics = metricsFromNormalizedUsage({
+      usage: normalized,
+      latencyMs,
+      model: modelUsed,
+      usedFileSearch: false,
+      usedFunctionTool: false,
+      fileSearchCalls: 0,
+    });
+
     return NextResponse.json({
       result: validated.data,
-      model: DEFAULT_MODEL,
+      model: modelUsed,
+      metrics,
     });
   } catch (error) {
     console.error("Extract error:", error);

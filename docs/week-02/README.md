@@ -4,6 +4,8 @@
 
 # **把 Week 1 的自由文本输出，升级成“结构化输出”**
 
+> **本仓库实现（国内 Kimi）**：结构化抽取走 **Moonshot Chat Completions** + `response_format: json_object` + Zod，**不使用** OpenAI Responses / `OPENAI_API_KEY`。说明见 [domestic-llm.md](../domestic-llm.md)。
+
 这样做很关键，因为 OpenAI 的 Structured Outputs 目标就是让模型按你定义的 JSON Schema 输出，减少格式漂移；官方文档还明确提到它的好处包括更可靠的类型安全、可检测的拒答，以及更少依赖“强行提示词”来约束格式。JavaScript SDK 也支持用 **Zod** 来定义 schema；在 Responses API 里可以用 `responses.parse(...)`，并从 `response.output_parsed` 取到解析后的对象。([OpenAI 平台](https://platform.openai.com/docs/guides/structured-outputs?lang=javascript))
 
 ---
