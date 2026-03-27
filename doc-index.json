@@ -1,0 +1,22 @@
+{
+  "documents": [
+    {
+      "filename": "faq.txt",
+      "content": "Q: 当前支持哪些能力？\r\nA: Prompt Lab、Structured Extractor、Doc QA。\r\n\r\nQ: 当前是否支持多工作区权限？\r\nA: 暂不支持。\r\n\r\nQ: Week 4 的目标是什么？\r\nA: 把前三周功能整合成 AI Workspace Lite Alpha，并加入最小工具调用。\r\n",
+      "charCount": 158
+    },
+    {
+      "filename": "product.md",
+      "content": "# AI Workspace Lite\r\n\r\n当前支持：\r\n1. Prompt Lab\r\n2. Structured Extractor\r\n3. Doc QA\r\n\r\n当前暂不支持：\r\n- 多工作区权限隔离\r\n- 自动执行高风险动作\r\n- 外部系统集成\r\n",
+      "charCount": 127
+    },
+    {
+      "filename": "roadmap.md",
+      "content": "# 路线图\r\n\r\nWeek 1: Prompt Lab v1\r\nWeek 2: Structured Extractor v1\r\nWeek 3: Doc QA v1\r\nWeek 4: 整合成 AI Workspace Lite Alpha，并加入最小工具调用\r\n",
+      "charCount": 131
+    }
+  ],
+  "totalFiles": 3,
+  "totalChars": 416,
+  "createdAt": "2026-03-27T01:05:19.083Z"
+}

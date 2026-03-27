@@ -10,6 +10,9 @@ export function AppNav() {
         <Link href="/extract" className="text-gray-700 hover:text-black hover:underline">
           Structured Extractor v1
         </Link>
+        <Link href="/docs" className="text-gray-700 hover:text-black hover:underline">
+          Doc QA v1
+        </Link>
       </div>
     </nav>
   );

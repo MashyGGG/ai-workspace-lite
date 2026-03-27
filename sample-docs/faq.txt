@@ -1,0 +1,8 @@
+Q: 当前支持哪些能力？
+A: Prompt Lab、Structured Extractor、Doc QA。
+
+Q: 当前是否支持多工作区权限？
+A: 暂不支持。
+
+Q: Week 4 的目标是什么？
+A: 把前三周功能整合成 AI Workspace Lite Alpha，并加入最小工具调用。

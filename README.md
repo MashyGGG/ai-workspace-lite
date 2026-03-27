@@ -14,7 +14,7 @@
 |------|------|
 | `MOONSHOT_API_KEY` | Kimi 开放平台 API Key（必填） |
 | `MOONSHOT_BASE_URL` | 一般为 `https://api.moonshot.cn/v1`（国内）或官方文档推荐地址 |
-| `MOONSHOT_MODEL` | 如 `kimi-k2.5`；Week 1 `/api/generate` 与 Week 2 `/api/extract` 共用 |
+| `MOONSHOT_MODEL` | 如 `kimi-k2.5`；Week 1–3 所有 API 路由共用 |
 
 > **说明：** Week 2 使用 Moonshot 文档支持的 Chat **`response_format: json_object`**，再配合 Zod 校验得到结构化对象；与 OpenAI Responses API 的 `responses.parse` 不是同一路径，但学习目标（稳定业务对象）一致。
 
@@ -22,6 +22,16 @@
 
 - 对应完整文档：[docs/week-01/README.md](docs/week-01/README.md)
 
+- 对应复盘文档: [docs/week-01/IMPLEMENTATION_REVIEW.md](docs/week-01/IMPLEMENTATION_REVIEW.md)
+
 ## Week 02 - Structured Extractor v1
 
 - 对应完整文档：[docs/week-02/README.md](docs/week-02/README.md)
+
+- 对应复盘文档: [docs/week-02/IMPLEMENTATION_REVIEW.md](docs/week-02/IMPLEMENTATION_REVIEW.md)
+
+## Week 03 - Doc QA v1
+
+- 对应完整文档：[docs/week-03/README.md](docs/week-03/README.md)
+
+- 对应复盘文档: [docs/week-03/IMPLEMENTATION_REVIEW.md](docs/week-03/IMPLEMENTATION_REVIEW.md)
