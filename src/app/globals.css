@@ -24,3 +24,110 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Markdown body for docs/important viewer */
+.important-md {
+  max-width: 100%;
+  line-height: 1.65;
+  font-size: 0.9375rem;
+}
+
+.important-md :where(h1, h2, h3, h4, h5, h6) {
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 1.75rem;
+  margin-bottom: 0.65rem;
+}
+
+.important-md :where(h1) {
+  font-size: 1.5rem;
+}
+
+.important-md :where(h2) {
+  font-size: 1.25rem;
+}
+
+.important-md :where(h3) {
+  font-size: 1.1rem;
+}
+
+.important-md :where(p) {
+  margin: 0.65rem 0;
+}
+
+.important-md :where(ul, ol) {
+  margin: 0.65rem 0;
+  padding-left: 1.5rem;
+}
+
+.important-md :where(li) {
+  margin: 0.25rem 0;
+}
+
+.important-md :where(blockquote) {
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid color-mix(in srgb, var(--foreground) 25%, transparent);
+  color: color-mix(in srgb, var(--foreground) 85%, transparent);
+}
+
+.important-md :where(hr) {
+  margin: 1.5rem 0;
+  border: none;
+  border-top: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
+}
+
+.important-md :where(a) {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.important-md :where(a:hover) {
+  text-decoration-thickness: 2px;
+}
+
+.important-md :where(pre) {
+  margin: 1rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  background: color-mix(in srgb, var(--foreground) 6%, transparent);
+}
+
+.important-md :where(code) {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.875em;
+}
+
+.important-md :where(pre code) {
+  font-size: inherit;
+  background: none;
+  padding: 0;
+}
+
+.important-md :where(p code, li code, td code) {
+  padding: 0.1em 0.35em;
+  border-radius: 0.25rem;
+  background: color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+.important-md :where(table) {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+}
+
+.important-md :where(th, td) {
+  border: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.important-md :where(th) {
+  font-weight: 600;
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+}

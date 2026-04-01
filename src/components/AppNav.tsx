@@ -19,6 +19,12 @@ export function AppNav() {
         <Link href="/docs" className="text-gray-700 hover:text-black hover:underline">
           Docs
         </Link>
+        <Link
+          href="/docs/important"
+          className="text-gray-700 hover:text-black hover:underline"
+        >
+          Important
+        </Link>
         <Link href="/workspace" className="text-gray-700 hover:text-black hover:underline">
           Workspace
         </Link>

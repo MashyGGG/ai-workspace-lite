@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import type { DocQAResponse } from "@/types/doc-qa";
 import type { Task } from "@/types/task";
@@ -89,6 +90,13 @@ export default function DocsPage() {
         <h1 className="text-3xl font-bold">Doc QA v1</h1>
         <p className="text-sm text-gray-600">
           基于已上传文档进行带引用问答。
+        </p>
+        <p className="text-sm text-gray-600">
+          需要直接阅读仓库内重要文档？请打开{" "}
+          <Link href="/docs/important" className="underline hover:no-underline">
+            Important docs
+          </Link>
+          。
         </p>
       </header>
 
